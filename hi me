@@ -1,0 +1,30 @@
+def binary_to_hex(array):
+    # Verify array is 8x8
+    if len(array) != 8 or any(len(row) != 8 for row in array):
+        raise ValueError("Input must be an 8x8 array")
+
+    hex_output = []
+    for col in range(8):
+        # Combine bits from each row into a single byte for the column
+        col_value = 0
+        for row in range(8):
+            col_value |= (array[row][col] << (7 - row))
+        # Append as hex
+        hex_output.append(f"0x{col_value:02X}")
+    return hex_output
+
+# Example usage:
+# Define an 8x8 binary array for the character "0" (0x3E, 0x41, 0x41, 0x3E)
+example_array = [
+    [0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0],
+    [0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+# Convert the array and print the result
+print(binary_to_hex(example_array))
