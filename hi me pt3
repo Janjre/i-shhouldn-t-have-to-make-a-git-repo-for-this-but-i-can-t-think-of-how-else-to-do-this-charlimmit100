@@ -1,0 +1,32 @@
+import tkinter as tk
+
+def create_grid(rows, columns):
+    root = tk.Tk()
+    root.title("2D Array of Checkboxes")
+
+    checkboxes = []
+    for row in range(rows):
+        row_checkboxes = []
+        for col in range(columns):
+            var = tk.IntVar()
+            checkbox = tk.Checkbutton(root, variable=var)
+            checkbox.grid(row=row, column=col)
+            row_checkboxes.append(var)
+        checkboxes.append(row_checkboxes)
+
+    def print_checkbox_states():
+        binary_array = []
+        for row in checkboxes:
+            binary_row = [var.get() for var in row]
+            binary_array.append(binary_row)
+            # print(binary_row)
+        print(binary_array)
+
+    button = tk.Button(root, text="Print Checkbox States", command=print_checkbox_states)
+    button.grid(row=rows, columnspan=columns)
+
+    root.mainloop()
+    return checkboxes
+
+# Example: Create a 4x5 grid of checkboxes
+checkboxes = create_grid(8, 8)
